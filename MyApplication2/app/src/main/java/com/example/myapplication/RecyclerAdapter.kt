@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
-class RecyclerAdapter(val kitapGorselListesi : ArrayList<String>,val kitapGorselBitmap : ArrayList<Bitmap>) : RecyclerView.Adapter<KitapViewHolder>() {
+class RecyclerAdapter(val kitapGorselListesi : ArrayList<String>,val kitapGorselleri : ArrayList<Int>) : RecyclerView.Adapter<KitapViewHolder>() {
 
     /*fun RecyclerAdapter()
     {
@@ -26,13 +26,15 @@ class RecyclerAdapter(val kitapGorselListesi : ArrayList<String>,val kitapGorsel
     override fun onBindViewHolder(holder: KitapViewHolder, position: Int) {
         // recycler view içerisindeki elemanlara ulaşırız
         holder.itemView.findViewById<TextView>(R.id.recyclerViewkitapAdText).text=kitapGorselListesi.get(position)
-        holder.itemView.findViewById<ImageView>(R.id.imageView).setImageBitmap(kitapGorselBitmap.get(position))
+        holder.itemView.findViewById<ImageView>(R.id.imageView).setImageResource(kitapGorselleri.get(position))
         holder.itemView.setOnClickListener{
             val kitapIsim = kitapGorselListesi.get(position);
             val intent = Intent(holder.itemView.context,KitapTanitim::class.java)
             intent.putExtra("kitapIsim",kitapIsim);
             val secilenKitap = SingletonClass.secilenKitap
+            /*
             secilenKitap.gorsel=kitapGorselBitmap.get(position)
+            */
             holder.itemView.context.startActivity(intent);
 
         }

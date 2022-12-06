@@ -391,19 +391,38 @@ Bileşenleri RecyclerView e bağlamak ve tek bir satır görünrüsünde tüm bi
 
 
             -----**** Kod ****------  // verimlitanımlama
+            Direk bitmap oluşturmak yerine klasorde neredeyse onu soyliyeceğiz(drawable)
+
+             val kitap1DrawableId= R.drawable.kitap1
+             val kitap2DrawableId= R.drawable.kitap2
+             val kitap3DrawableId= R.drawable.kitap3
+             val kitap4DrawableId= R.drawable.kitap4
+
+            var kitapDrawableIdArrayList = ArrayList<Int>()
+            kitapDrawableIdArrayList.add(kitap1DrawableId)
+            kitapDrawableIdArrayList.add(kitap2DrawableId)
+            kitapDrawableIdArrayList.add(kitap3DrawableId)
+            kitapDrawableIdArrayList.add(kitap4DrawableId)
 
 
 
 
+        ------ Adapter kısmındaki değişiklikler
+
+            ArrayList Int oldu
+            ==> class RecyclerAdapter(val kitapGorselListesi : ArrayList<String>,val kitapGorselleri : ArrayList<Int>) : RecyclerView.Adapter<KitapViewHolder>() {
 
 
 
+            yeni arraylist position secildi ve singelton class kaldırıldı
+             override fun onBindViewHolder(holder: KitapViewHolder, position: Int) {
 
-
-
-
-
-
+                holder.itemView.findViewById<TextView>(R.id.recyclerViewkitapAdText).text=kitapGorselListesi.get(position)
+           ==>  holder.itemView.findViewById<ImageView>(R.id.imageView).setImageResource(kitapGorselleri.get(position))
+            .
+            .
+            .
+            }
 
 
 

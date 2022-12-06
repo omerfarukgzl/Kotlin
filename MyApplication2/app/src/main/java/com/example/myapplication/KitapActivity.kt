@@ -26,6 +26,8 @@ class KitapActivity : AppCompatActivity() {
         kitapIsimleri.add("kitap3")
         kitapIsimleri.add("kitap4")
 
+        /*
+        // verimsiz tanımlama
 
         val kitap1Bitmap = BitmapFactory.decodeResource(applicationContext.resources,R.drawable.kitap1)
         val kitap2Bitmap = BitmapFactory.decodeResource(applicationContext.resources,R.drawable.kitap2)
@@ -38,13 +40,31 @@ class KitapActivity : AppCompatActivity() {
         gorselBitmapListesi.add(kitap3Bitmap)
         gorselBitmapListesi.add(kitap4Bitmap)
 
+        */
+
+
+        //   verimli tanımlama  ==> Direk bitmap oluşturmak yerine klasorde neredeyse onu soyliyeceğiz(drawable)
+
+        val kitap1DrawableId= R.drawable.kitap1
+        val kitap2DrawableId= R.drawable.kitap2
+        val kitap3DrawableId= R.drawable.kitap3
+        val kitap4DrawableId= R.drawable.kitap4
+
+        var kitapDrawableIdArrayList = ArrayList<Int>()
+        kitapDrawableIdArrayList.add(kitap1DrawableId)
+        kitapDrawableIdArrayList.add(kitap2DrawableId)
+        kitapDrawableIdArrayList.add(kitap3DrawableId)
+        kitapDrawableIdArrayList.add(kitap4DrawableId)
+
+
+
         val layoutManager = LinearLayoutManager(this)
 
         binding  = ActivityKitapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.recyclerView.layoutManager=layoutManager
 
-        val recyclerAdapter = RecyclerAdapter(kitapIsimleri,gorselBitmapListesi)
+        val recyclerAdapter = RecyclerAdapter(kitapIsimleri,kitapDrawableIdArrayList)
         binding.recyclerView.adapter=recyclerAdapter
 
 
