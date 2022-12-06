@@ -29,10 +29,15 @@ class RecyclerAdapter(val kitapGorselListesi : ArrayList<String>,val kitapGorsel
         holder.itemView.findViewById<ImageView>(R.id.imageView).setImageResource(kitapGorselleri.get(position))
         holder.itemView.setOnClickListener{
             val kitapIsim = kitapGorselListesi.get(position);
+            val kitapGorsel = kitapGorselleri.get(position)
             val intent = Intent(holder.itemView.context,KitapTanitim::class.java)
             intent.putExtra("kitapIsim",kitapIsim);
-            val secilenKitap = SingletonClass.secilenKitap
+            intent.putExtra("kitapGorsel",kitapGorsel);
+
+
+
             /*
+            val secilenKitap = SingletonClass.secilenKitap
             secilenKitap.gorsel=kitapGorselBitmap.get(position)
             */
             holder.itemView.context.startActivity(intent);

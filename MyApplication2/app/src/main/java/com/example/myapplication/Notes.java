@@ -66,6 +66,9 @@ Not/: Button click için tetiklenecek fonskiyonun yazımında öncelikle button 
 
 
 
+
+
+
 ---------------------- Veri Aktarma-------------------
 
 -- Intent ile --
@@ -407,7 +410,7 @@ Bileşenleri RecyclerView e bağlamak ve tek bir satır görünrüsünde tüm bi
 
 
 
-        ------ Adapter kısmındaki değişiklikler
+        ------ Adapter class'ında değişiklikler  ==> Bitmap aktarılmadı Resource file ind id listesi aktarıldı
 
             ArrayList Int oldu
             ==> class RecyclerAdapter(val kitapGorselListesi : ArrayList<String>,val kitapGorselleri : ArrayList<Int>) : RecyclerView.Adapter<KitapViewHolder>() {
@@ -416,14 +419,36 @@ Bileşenleri RecyclerView e bağlamak ve tek bir satır görünrüsünde tüm bi
 
             yeni arraylist position secildi ve singelton class kaldırıldı
              override fun onBindViewHolder(holder: KitapViewHolder, position: Int) {
+            holder.itemView.findViewById<TextView>(R.id.recyclerViewkitapAdText).text=kitapGorselListesi.get(position)
+       ==>  holder.itemView.findViewById<ImageView>(R.id.imageView).setImageResource(kitapGorselleri.get(position))
+            holder.itemView.setOnClickListener{
+                val kitapIsim = kitapGorselListesi.get(position);
+       ==>      val kitapGorsel = kitapGorselleri.get(position)
+                val intent = Intent(holder.itemView.context,KitapTanitim::class.java)
+                intent.putExtra("kitapIsim",kitapIsim);
+       ==>      intent.putExtra("kitapGorsel",kitapGorsel);
 
-                holder.itemView.findViewById<TextView>(R.id.recyclerViewkitapAdText).text=kitapGorselListesi.get(position)
-           ==>  holder.itemView.findViewById<ImageView>(R.id.imageView).setImageResource(kitapGorselleri.get(position))
-            .
-            .
-            .
             }
 
+
+      ------ Kitap Tanıtim class'ında değişiklikler  ==> alınan resource id int tipindeki verileri bitmape dönüştürdük
+
+
+            val intent =intent
+
+            binding  = ActivityKitapTanitimBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+    ==>     // alınan resource id int tipindeki verileri bitmape dönüştürdük
+            val alinanVeriKitapGorsel = intent.getIntExtra("kitapGorsel",0)
+            val bitmap = BitmapFactory.decodeResource(applicationContext.resources,alinanVeriKitapGorsel)
+            binding.kitapTanitmImage.setImageBitmap(bitmap)
+
+
+            val alinanVeriKitapIsim = intent.getStringExtra("kitapIsim")
+            binding.kitapTanitimText.text=alinanVeriKitapIsim
+
+      ==>   //binding.kitapTaniitmImage.setImageBitmap(SingletonClass.gorsel)
 
 
 

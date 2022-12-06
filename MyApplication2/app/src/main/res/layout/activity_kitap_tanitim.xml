@@ -7,7 +7,7 @@
     tools:context=".KitapTanitim">
 
     <ImageView
-        android:id="@+id/kitapTaniitmImage"
+        android:id="@+id/kitapTanitmImage"
         android:layout_width="236dp"
         android:layout_height="0dp"
         android:layout_marginBottom="45dp"
@@ -26,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kitapTaniitmImage" />
+        app:layout_constraintTop_toBottomOf="@+id/kitapTanitmImage" />
 
     <TextView
         android:id="@+id/textView4"
@@ -35,7 +35,7 @@
         android:layout_marginTop="46dp"
         android:layout_marginBottom="32dp"
         android:text="Kitap Tanitim Activity"
-        app:layout_constraintBottom_toTopOf="@+id/kitapTaniitmImage"
+        app:layout_constraintBottom_toTopOf="@+id/kitapTanitmImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
