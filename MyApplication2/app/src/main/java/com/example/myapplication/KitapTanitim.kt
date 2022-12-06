@@ -1,9 +1,8 @@
 package com.example.myapplication
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Parcelable
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityKitapTanitimBinding
 
@@ -35,8 +34,24 @@ class KitapTanitim : AppCompatActivity() {
 
     }
 
+    fun onClickFragrment1Button(view: View){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        val firstFragment = BlankFragment()
+        fragmentTransaction.add(R.id.frameLayout,firstFragment).commit()
+
+    }
+
+    fun onClickFragrment2Button(view: View){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        val secondFragment = BlankFragment2()
+        fragmentTransaction.add(R.id.frameLayout,secondFragment).commit()
 
 
+    }
 
 
 

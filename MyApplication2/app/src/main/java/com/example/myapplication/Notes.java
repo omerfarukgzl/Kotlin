@@ -122,6 +122,35 @@ Not:// eğer bir activity ye birdaha dönülmeyecekse o activity destroy edilmel
 
 
 
+
+
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
+
+
+------------------------ Inflater -------------------------
+
+XML görüntülerin View objelerine çevrilmesi için kullanılır. Daha sonra bu view objesi ekranda gösterilebeilir
+
+Çok fazla kaynak tüketir bellek harcar bundan dolayı optimizasyonu iyi yapılmalı
+
+getSystemServive() veya getLayoutInflater() denilerek kullanılabilir
+
+çevrilecek XML in R.layout üzerinde kayıtlı olması lazım . Dinamik bir layout söz konusu değil
+
+
+------------------------ Inflater -------------------------
+
+
+
+
+
+
 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
 
@@ -602,6 +631,44 @@ Not:// oluşturulan bitMapler tümü kullanılacaksa ArrayList te Bitmap Türün
         onDestroy()         ==> Fragment kalan son kaynakları da temizlenmesi için çağırılır
 
         onDeattach()        ==> Fragment bulunduğu activityden ayrıldığında çağırılır
+
+
+
+🔑 Genellikle fragment içeren aktivite için en azından aşağıdaki metotlar implement edilmelidir.
+
+onCreate()
+onCreateView()
+onPause()
+
+🔑 Her bir Fragment Transaction (Fragmentlar arası işlem) aktivite tarafından yönetilen Back Stacke kaydedilmelidir.
+ Back stack fragmentın metotlarının geriye dönük olarak çalıştırılabilmesini sağlar.
+
+🔑 Oluşturulma sürecinde hem aktivitede hem de fragmentta bulunan ve aynı adı taşıyan metotlardan aktivitenin metodu önce fragment metodu daha sonra çalışır.
+
+
+
+
+
+    Fragmentlar oluşturulur.
+    Daha sonra xml kısımlarında göstermek istediğimiz componentler eklenir
+    Daha sonra fragment ları bağlayacağımız activity'e iki buton ekledik farklı fragmentlar'ı test etmek için
+    Daha sonra bu buttonların click methodlarını hazırladık
+    Daha sonra Activity üzerinde göstereceğimiz fragment ların nasıl ve ne içinde gösterileceğini berlirlemek için framelayout ekledik acticty'e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
