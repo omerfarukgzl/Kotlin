@@ -285,6 +285,15 @@ Not::// Bir Xml ile kod birbirine bağlanacaksa Inflater kullanılır
 
 
 
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
+
+
 
 --------------------------- Recycler View ---------------------------
 https://medium.com/i%CC%87yi-programlama/kotlinde-recyclerview-kullan%C4%B1m%C4%B1-c7d533c1da72
@@ -534,6 +543,72 @@ Not :// Görselleri nesneleştirmek için Bitmap kullanılır
 val kitap1Bitmap = BitmapFactory.decodeResource(applicationContext.resources,R.drawable.kitap1) //applicatiomContext.resources ==> uygulamanın kaynaklarına ulaştık  R.drawable.kitap1==> resmin id sini veredik id= ad
 
 Not:// oluşturulan bitMapler tümü kullanılacaksa ArrayList te Bitmap Türünde sakala
+
+
+
+
+
+
+
+
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
+--------------------------- Fragment ---------------------------
+
+-- Fragment Nedir ?
+    Bir kullanıcı ara yüzüdür.
+    Uygulamalarımızda her zaman birden fazla ekran kullanmaya ihtiyaç vardır.
+    Fragmentler sayesinde birden fazla ekran kullanabiliriz.
+    Tek bir ekranı iki farklı işlev için kullanılır.
+    Fragmentler Activity olmadan çalışamazlar.
+
+    Fragmentler acitvity içerisinde fragment manager ile yönetilirler. Fragmentlerin de kendilerine ait bir yaşam döngüsü vardır.
+    Kendi olaylarını kendisi halleder.
+    Yani activity çalışmaya devam ederken düzenleme yapılabilir.
+    Aynı ekranda bağımsız olarak kullanılabilir.
+
+    Not://  !!️
+    Activityler Fragmentlerin yaşam döngülerinden etkilenmezler. Ancak Fragmentler Activity lerin yaşam döngülerinden etkilenirler.
+
+
+
+
+
+    -- Fragment Yaşam Döngüsü
+
+        onAttach()          ==> Fragment ilk activity'e eklenir. Referans olarak eklendiği context'i alır
+
+        onCreate()          ==> Fragment oluşturulduğunda bu metod çağırılır. Referans olarak Bundle objesi alır. Fragment 'i çalıştıracak olan kurucu fonk. çağırılır
+
+        onCreateView()      ==> Fragmentların view e ilk eklenirken çağırılan metoddur. Mutlaka fragment layoutun çatısı olan view geri döndürmelidir. eğer layout içermiyorsa null döndürür
+
+        onActivityCreated() ==> Activitylerin create metdou bittikten sonra çağırılır. activity nin UI nesnelerine erişmeye çalışmadan önce activity oluşumu tamamlandığın gösterir
+
+        onStart()           ==> Fragment görünür olduğunda çağırılır
+
+        onResume()          ==> Fragment 'ın kullanıcı ile etkileşime geçtiğ yerdir. Activity nin onResume methodundan sonra çağırılır.
+
+        onPause()           ==> Fragment in kullanıcı ile etkileşimi sonlandığında çağırılır.
+
+        onStop()            ==> Fragment in kullanıcıya görünür olmadığı zaman çağırılır.Activity durduğunda fragment da durur.
+
+        onDestroyView()     ==> Sonlanma evresine girer fargment UI kaynakları temizlenir
+
+        onDestroy()         ==> Fragment kalan son kaynakları da temizlenmesi için çağırılır
+
+        onDeattach()        ==> Fragment bulunduğu activityden ayrıldığında çağırılır
+
+
+
+--------------------------- Fragment ---------------------------
+
+
+
 
 
 
