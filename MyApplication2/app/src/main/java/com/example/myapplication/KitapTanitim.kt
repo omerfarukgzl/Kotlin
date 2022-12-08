@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
@@ -26,6 +27,7 @@ class KitapTanitim : AppCompatActivity() {
         binding.kitapTanitmImage.setImageBitmap(bitmap)
 
 
+
         val alinanVeriKitapIsim = intent.getStringExtra("kitapIsim")
         binding.kitapTanitimText.text=alinanVeriKitapIsim
 
@@ -34,24 +36,36 @@ class KitapTanitim : AppCompatActivity() {
 
     }
 
-    fun onClickFragrment1Button(view: View){
+
+    // fragment manuel olarak bağlandı
+
+  fun onClickFragrment1Button(view: View){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        val firstFragment = BlankFragment()
+        val firstFragment = BlankFragment1()
         fragmentTransaction.add(R.id.frameLayout,firstFragment).commit()
 
     }
 
+    fun onClickActivityNavigation(view: View) {
+
+        val intent = Intent(applicationContext,NavigationActivity::class.java)
+        startActivity(intent);
+    }
+
+
+/*
     fun onClickFragrment2Button(view: View){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
         val secondFragment = BlankFragment2()
         fragmentTransaction.add(R.id.frameLayout,secondFragment).commit()
-
-
     }
+*/
+
+
 
 
 

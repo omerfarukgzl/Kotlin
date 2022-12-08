@@ -658,21 +658,204 @@ onPause()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --------------------------- Fragment ---------------------------
+
+
+
+
+
+
+
+
+
+
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
+
+
+
+
+
+--------------------------- Navigation ---------------------------
+
+
+Öncelikle navigation'u projemize implemet etmeliyiz.
+
+dependencies {
+  def nav_version = "2.3.0-alpha02"
+  // Kotlin
+  implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+  implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+  // Testing Navigation
+  androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+}
+
+
+
+
+ --Navigation Nedir
+
+    Navigation, kullanıcıların uygulamanızdaki içerikler arasındaki gezintilerine ya da içeriklere girdikten sonra geri çıkmasına verilen isimdir.
+    Peki kendimiz manuel olarak bu gezintileri yönetebiliyorken, navigation bileşeni bize ne sağlar?
+    Navigation component belirlenmiş ilkelere bağlı kalarak tutarlı ve öngörülü bir kullanıcı deneyimi verebilmemiz için bize kolaylık sağlar.
+    Yani bir kullanıcının girmiş olduğu içerikte back butonuna bastığında davranması gereken işi kendi yönetir.
+
+
+
+ --  Navigation bileşeninin avantajları;
+
+    Fragment geçiş işlemlerini handle eder.
+    Geri butonu işlevini varsayılana göre düzenler.
+    Animasyonlar ve geçiş işlemleri için standartlaştırılmış kaynaklar sağlar.
+    Deep linking işlemini handle eder.
+    Navigation UI pattern içerir (navigation drawers, bottom navigation vs).
+    Navigation Editor, hazırladığınız navigation graph’ı görmek veya düzenleyebilmek için kolaylık sağlar.
+
+
+ -- Navigation Graph
+
+    Res altında new android resource file diyoruz. Resource de navigation seçilir. adına navigation_graph denir genelde. Büyük karakter olmamalı
+    Daha sonra bir navigation graph oluşturuyoruz.
+    Bu oluşturduğumuz xml aslında tüm geçişleri ve hedef fragmentlerinizi belirlediğiniz bir kaynak dosyasıdır.
+    Aşağıdaki figürde her bir ekran bir fragmentı, oklar ise geçişleri temsil eder.
+
+    Daha sonra fragmentlar içerisinde onclick yerine setOnClickListener kullanarak yazabilirz.
+
+    Veri aktarımı yapılacağı zaman argument oluşturulmalıdır. Hangi tipte ise gönderielecek veri o tipte seçilmelidir
+
+
+ -- Navigation Activty Üzerinde Navaigation Fragment Gösterimi
+
+    Bileşenlerden Navhost Fragment seçilir ve oluşturduğumuz graph eklenir. Böylece göstermek istediğimiz fragmentler bağlanmış olur .( Manule bağlamadan farkllı olarak graph ile otomatik bğlanır)
+
+
+
+
+
+ -- Navigation Fragment arguments iletimi
+
+     view.findViewById<Button>(R.id.button4).setOnClickListener{
+            val gonderilecekVeri = binding?.textView5?.text.toString()
+            val bundle = bundleOf("veri" to gonderilecekVeri)
+            Navigation.findNavController(it).navigate(R.id.action_blankFragment_to_blankFragment2,bundle)
+        }
+
+        button'a basıldığı zaman gönderielecek veri viewBinding ile textView üzerinden alınır ve bu veri bundle ile findNavController.navigate kullanılarak fragment2 ye akatılır.
+
+
+--------------------------- Navigation ---------------------------
+
+
+
+
+
+
+
+
+
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
+
+
+
+
+------------------------------- SQLite ---------------------------------
+
+
+ -- SQLite Nedir ?
+
+    Local VeriTabandır. Cihazda Gömülü olarak saklanır.( Not alma uygulaması buna bir örnektir) uygulama silinince veriler de silinir. Data klasoru altında saklanır.
+
+
+    SQLite, SQL ile uyumlu ilişkisel bir veritabanıdır.
+    MySQL ve PostgreSQL gibi diğer SQL tabanlı sistemlerin aksine SQLite, istemci-sunucu mimarisi kullanmaz.
+    Tüm program, uygulamalara entegre edilmiş bir C kütüphanesinde bulunur.
+    Veritabanı, yoğun kaynak kullanan bağımsız süreçleri ortadan kaldırarak programın ayrılmaz bir parçası haline gelir.
+
+    SQLite, verilerini tek bir platformlar arası dosyada saklar.
+     Özel bir sunucu veya özel dosya sistemi olmadığından, SQLite'ı "dağıtmak", kitaplığını bağlamak ve yeni bir normal dosya oluşturmak kadar kolaydır.
+
+    Bu basitlik, SQLite'ın uygulamalar ve gömülü cihazlar için tercih edilen veritabanı sistemi olarak büyük ölçüde benimsenmesine yol açmıştır.
+    SQLite dağıtımlarının toplam sayısının diğer tüm veritabanı motorlarını aştığına inanılıyor kombineçünkü tüm büyük işletim sistemleri, çoğu programlama dili, kapsamlı bir yerleşik donanım listesi ve birçok önemli yazılım ürünü ile birlikte gelir.
+
+
+ -- Veritabanını oluşturmak.
+
+        openOrCreate ==> varsa aç yoksa veritabanını oluştur.
+        veritabaniAdi="Kitaplar"
+        mode= MODE_PRIVATE // sadece uygulama tarafından kullanılacak
+        cursor = null
+         veritabani.execSQL() ==> veritabanuı komutları yazılır
+
+
+
+        try{
+        val veriTabani= this.openOrCreateDatabase("Kitaplar",MODE_PRIVATE,null) // Kitaplar diye veritabanı olustur
+        veriTabani.execSQL("CREATE TABLE IF NOT EXISTS diniKitap (id INTEGER PRIMARY KEY , isim TEXT) ") // diniKitap adında tablo oluştur ve sutunlarının özellikleirini gir
+        //veriTabani.execSQL("DROP TABLE diniKitap")
+
+
+         for(name in kitapIsimleri )
+                veriTabani.execSQL("INSERT INTO diniKitap (isim) VALUES ('$name')")
+
+        //  veriTabani.execSQL("INSERT INTO diniKitap (isim,fiyat) VALUES ('ad',fiyat)") ==> diniKitap tablosuna ürün ekle
+
+        //  cursor bir imleçtir sorgu sonucuna atanır ve bu cursor kullanılarak istenilen alan bulunur
+        // while ile cursor, kendisine atanan sorgu sonucundaki gelen sonuç tablsounda hareket edebildiği son yere kadar gezdirilir == moveToNext()
+
+
+        val cursor=veriTabani.rawQuery("SELECT * FROM diniKitap",null) // ---  selection args filtreleme özelliğidir biz şuan kullanmıyoruz
+        //val cursor=veriTabani.rawQuery("SELECT * FROM diniKitap WHERE isim='kitap3'",null) // denilebilirdi
+
+
+        // arama yapmak icin sutun numaralarını aldık . Manuel olarak 0 1 2 3 de diyeilirdik sutun index nosu
+        val ıdCoulmnIndex = cursor.getColumnIndex("id")
+        val isimCoulmnIndex = cursor.getColumnIndex("isim")
+
+        while(cursor.moveToNext())
+        {
+            // println getInt , getString yapılmaısnın sebebi sutun alanındaki veri nasıl kaydedildiyse onun tipinde yazdırılır
+            println("ID : ${cursor.getInt(ıdCoulmnIndex)}")
+            println("Kitap Adı : ${cursor.getString(isimCoulmnIndex)}")
+
+            // istenilen fieldın bulunması
+            if(cursor.getString(isimCoulmnIndex).equals("kitap3"))
+            {
+                println("!!!!! kitap 3 veritabında bulundu bulundu")
+            }
+        }
+        cursor.close()
+    }catch (e:Exception){
+        println("!!! Ben Hata " + e)
+    }
+
+------------------------------- SQLite ---------------------------------
+
+
+
+
+
+
+
+
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
 
 
 

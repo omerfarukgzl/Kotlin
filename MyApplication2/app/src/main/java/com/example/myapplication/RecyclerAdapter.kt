@@ -34,12 +34,6 @@ class RecyclerAdapter(val kitapGorselListesi : ArrayList<String>,val kitapGorsel
             intent.putExtra("kitapIsim",kitapIsim);
             intent.putExtra("kitapGorsel",kitapGorsel);
 
-
-
-            /*
-            val secilenKitap = SingletonClass.secilenKitap
-            secilenKitap.gorsel=kitapGorselBitmap.get(position)
-            */
             holder.itemView.context.startActivity(intent);
 
         }
